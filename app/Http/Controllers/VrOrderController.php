@@ -19,11 +19,9 @@ class VrOrderController extends Controller {
         $dataFromModel = new VrOrder;
         $config = $this->listBladeData();
         $config['tableName'] = $dataFromModel->getTableName();
-        $config['list'] = $dataFromModel->get()->toArray();
+        $config['list'] = $dataFromModel->with(['experiences'])->get()->toArray();
 
-		$config['orders'] = VrOrder::with(['experiences'])->get()->toArray();
-
-		return view('admin.orderList', $config);
+		return view('admin.listView', $config);
 	}
 
 	/**

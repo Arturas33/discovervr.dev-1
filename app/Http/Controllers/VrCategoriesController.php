@@ -20,7 +20,7 @@ class VrCategoriesController extends Controller {
         $config['tableName'] = $dataFromModel->getTableName();
         $config['list'] = VrCategories::with(['translation'])->get()->toArray();
 
-        return view('admin.categoriesList', $config);
+        return view('admin.listView', $config);
 	}
 
 	/**

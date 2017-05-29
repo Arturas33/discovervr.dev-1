@@ -18,4 +18,6 @@ class VrPagesTranslations extends CoreModel
      * @var array
      */
     protected $fillable = ['id', 'page_id', 'language_code', 'slug', 'title', 'description_short', 'description_long'];
+
+    //private function hasOne
 }

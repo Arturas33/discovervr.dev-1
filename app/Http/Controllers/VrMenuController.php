@@ -19,12 +19,11 @@ class VrMenuController extends Controller
      */
     public function index()
     {
-		$config['menu'] = VrMenu::orderBy('sequence', 'asc')->get()->toArray();
-		$config['create'] = 'app.menu.create';
-        $config['edit'] = 'app.menu.edit';
-		$config['delete'] = 'app.menu.destroy';
-//        dd($config);
-		return view('admin.menu.index', $config);
+        $dataFromModel = new VrMenu;
+        $config = $this->listBladeData();
+        $config['tableName'] = $dataFromModel->getTableName();
+		$config['list'] = VrMenu::orderBy('sequence', 'asc')->get()->toArray();
+		return view('admin.listView', $config);
     }
 
     /**
@@ -149,4 +148,13 @@ class VrMenuController extends Controller
         }
     }
 
+    private function listBladeData()
+    {
+        $config = [];
+        $config['show'] = 'app.orders.show';
+        $config['create'] = 'app.orders.create';
+        $config['delete'] = 'app.orders.destroy';
+        $config['edit'] = 'app.orders.edit';
+        return $config;
+    }
 }

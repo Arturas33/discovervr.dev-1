@@ -17,10 +17,12 @@ class VrPagesController extends Controller {
 	 */
 	public function index()
 	{
+        $dataFromModel = new VrPages;
         $config = $this->listBladeData();
-        $config['list'] = VrPages::with(['translation', 'category', 'resource'])->get()->toArray();
+        $config['tableName'] = $dataFromModel->getTableName();
+        $config['list'] = $dataFromModel->with(['translation', 'category', 'resource'])->get()->toArray();
 
-        return view('admin.pageList', $config);
+        return view('admin.listView', $config);
 	}
 
 	public function indexFrontEnd($slug)

@@ -9,7 +9,7 @@
 </head>
 <body>
 	@include('admin.messages')
-
+	@include('menu_admin')
 	@yield('content')
 
 

@@ -1,24 +1,28 @@
 @extends('base')
 
 @section('content')
-
     <div class="container">
+        <h2>{{ucfirst($tableName)}}s table</h2>
+        <a href="{{ route($create) }}">Create new {{$tableName}}</a>
         <table class="table table-bordered">
+            <thead>
+            <tr>
+                @foreach($list[0] as $key => $value)
+                    <th>{{$key}}</th>
+                @endforeach
+                <th>edit</th>
+                <th>show</th>
+                <th>delete</th>
+
+            </tr>
+            </thead>
+            <tbody>
             @foreach($list as $key => $record)
                 <tr id="{{$record['id']}}">
                     @foreach($record as $key => $value)
-
                         <td>
                             @if(!is_array($value))
-                                {{$value}}
-                            @else
-                                <ul>
-                                    @foreach ($value as $translation)
-                                        <li>
-                                            {{$translation['pivot']['name']}}
-                                        </li>
-                                    @endforeach
-                                </ul>
+                            {{$value}}
                             @endif
                         </td>
                     @endforeach
@@ -26,7 +30,6 @@
                             <button type="button" class="btn btn-primary">Edit</button>
                         </a>
                     </td>
-
                     <td><a href="{{ route($show, $record['id']) }}">
                             <button type="button" class="btn btn-success">Show</button>
                         </a>
@@ -37,16 +40,15 @@
                         </button>
                     </td>
                 </tr>
-            @endforeach
 
+            @endforeach
             </tbody>
         </table>
     </div>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-
 @endsection
 
+@section('scripts')
     <script>
         $.ajaxSetup({
             headers: {
@@ -66,4 +68,6 @@
                 }
             });
         }
+
     </script>
+@endsection

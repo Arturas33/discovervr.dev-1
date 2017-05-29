@@ -4,7 +4,7 @@
     <table class="table table-bordered">
         <thead>
         <tr>
-            @foreach($list[0] as $key => $value)
+            @foreach($list as $key => $value)
                 <th>{{$key}}</th>
             @endforeach
             <th>edit</th>
