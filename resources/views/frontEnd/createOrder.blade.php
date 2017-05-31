@@ -9,7 +9,7 @@
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script>  $( function() {
             $(".datepicker").datepicker({
-                dateFormat: 'dd/mm/yy',
+                dateFormat: 'Y/d/m',
                 minDate: 0,
                 maxDate: 30
             });
@@ -21,12 +21,20 @@
         {{ Form::checkbox('room[]', $key) }}
         {{$room}}
         {{ Form::text($key.'date', null, ['class' => 'datepicker ' . $key]) }}<br>
-            @for ($i = 1; $i < 73; $i++)
-            {{ Form::checkbox($key.'time[]', $i) }}
-                {{$i}}
-            @endfor
+            @foreach ($time as $reservation)
+            {{ Form::checkbox($key.'time[]', $reservation) }}
+                {{$reservation}}
+            @endforeach
         <label>
         </label><br>
         @endforeach
+
+<script>
+    var now = new Time();
+    var daysOfYear = [];
+    for (var d = new Date(2012, 0, 1); d <= now; d.setDate(d.getDate() + 1)) {
+        daysOfYear.push(new Date(d));
+    }
+</script>
 
     {{ Form::submit('Order') }}

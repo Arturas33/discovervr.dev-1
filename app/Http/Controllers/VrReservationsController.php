@@ -1,6 +1,7 @@
 <?php namespace App\Http\Controllers;
 
 use App\Models\VrReservations;
+use DateTime;
 use Illuminate\Routing\Controller;
 use Ramsey\Uuid\Uuid;
 
@@ -50,16 +51,16 @@ class VrReservationsController extends Controller {
 	public function storeFromOrder($experience, $record)
     {
 
-    foreach($experience as $key => $room) {
-        foreach ($room as $time) {
-            VrReservations::create([
-                'id' => Uuid::uuid4(),
-                'experience_id' => $key,
-                'time' => $time,
-                'order_id' => $record->id
-            ]);
-        }
-    }
+//    foreach($experience as $key => $room) {
+//        foreach ($room as $time) {
+//            VrReservations::create([
+//                'id' => Uuid::uuid4(),
+//                'experience_id' => $key,
+//                'time' => $time,
+//                'order_id' => $record->id
+//            ]);
+//        }
+//    }
 
     }
 

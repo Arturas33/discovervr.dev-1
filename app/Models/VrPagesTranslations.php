@@ -8,6 +8,8 @@ class VrPagesTranslations extends CoreModel
 {
     use UuidTrait;
 
+
+
     /**
      * Database table name
      * @var string

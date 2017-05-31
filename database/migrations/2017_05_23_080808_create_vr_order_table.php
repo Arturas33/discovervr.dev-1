@@ -19,6 +19,7 @@ class CreateVrOrderTable extends Migration {
 			$table->timestamps();
 			$table->softDeletes();
 			$table->enum('status', array('pending','canceled','aproved'))->nullable();
+			$table->string('user_id', 36)->nullable()->index('fk_vr_order_vr_users1_idx');;
 		});
 	}
 

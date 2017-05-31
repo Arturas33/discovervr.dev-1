@@ -15,6 +15,7 @@ class VrPagesController extends Controller {
 	 *
 	 * @return Response
 	 */
+
 	public function index()
 	{
         $dataFromModel = new VrPages;
@@ -61,12 +62,21 @@ class VrPagesController extends Controller {
 	public function store()
 	{
         $resource = request()->file('image');
+        dd($resource);
         $uploadController = new VrResourcesController();
         $data = request()->all();
-        $article = VrPages::create([
-            'category_id' => $data['categories'],
-            'cover_id' => $uploadController->upload($resource)
-        ]);
+
+        if($resource != null) {
+            $article = VrPages::create([
+                'category_id' => $data['categories'],
+                'cover_id' => $uploadController->upload($resource)
+            ]);
+        } else {
+            $article = VrPages::create([
+                'category_id' => $data['categories'],
+            ]);
+        }
+
         $record = new VrPagesTranslationsController();
         $record->storeFromVrPagesController($data, $article);
 
@@ -83,7 +93,7 @@ class VrPagesController extends Controller {
 	public function show($id)
 	{
         $config['item'] = VrPages::with(['translation', 'category', 'resource'])->find($id)->toArray();
-
+        $config['ignore'] = ['blede', 'meme'];
         return view('admin.pageSingle', $config);
 	}
 
@@ -99,6 +109,20 @@ class VrPagesController extends Controller {
         $config['id'] = $id;
         $config['categories'] = VrCategoriesTranslations::where('language_code', '=', 'en')->pluck('name', 'category_id');
         $config['item'] = VrPages::with(['translation', 'category', 'resource'])->find($id)->toArray();
+        $config['ignore'] = ['count',
+            'id',
+            'translation',
+            'category',
+            'resource',
+            'created_at',
+            'updated_at',
+            'deleted_at',
+            'category_id',
+            'cover_id',
+            'page_id',
+            'language_id',
+            'language_code'
+        ];
 
         return view ('admin.pageEdit', $config);
 	}
@@ -112,7 +136,21 @@ class VrPagesController extends Controller {
 	 */
 	public function update($id)
 	{
-		//
+	    //TODO set if file exists
+        $resource = request()->file('image');
+        $uploadController = new VrResourcesController();
+        $data = request()->all();
+
+        if($resource != null) {
+            VrPages::where('id', '=', $id)->update([
+                'cover_id' => $uploadController->upload($resource)
+            ]);
+        }
+
+        $record = new VrPagesTranslationsController();
+        $record->updateFromVrPagesController($data, $id);
+
+        return redirect()->route('app.pages.index');
 	}
 
 	/**
@@ -124,7 +162,9 @@ class VrPagesController extends Controller {
 	 */
 	public function destroy($id)
 	{
-		//
+        if (VrPages::destroy($id)){
+            return ["success" => true, "id" => $id];
+        }
 	}
 
     private function listBladeData()
