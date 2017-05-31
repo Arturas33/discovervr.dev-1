@@ -126,7 +126,9 @@ class VrCategoriesTranslationsController extends Controller {
 	 */
 	public function destroy($id)
 	{
-		//
+		if(VrPages::destory($id)) {
+
+        }
 	}
 
 }

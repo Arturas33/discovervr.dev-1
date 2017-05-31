@@ -1,32 +1,53 @@
 <html lang="en">
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>jQuery UI Datepicker - Default functionality</title>
-    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-    <link rel="stylesheet" href="/resources/demos/style.css">
-    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-    <script>  $( function() {
-            $(".datepicker").datepicker({
-                dateFormat: 'dd/mm/yy',
-                minDate: 0,
-                maxDate: 30
-            });
-        } );
-    </script>
+    @include('style')
+    {{--<meta charset="utf-8">--}}
+    <script src="http://code.jquery.com/jquery-2.0.0.js"></script>
     {!! Form::open(['url' => route('app.orders.create')]) !!}
 
+    {{ Form::select('date', $date, null, ['id' => 'date']) }} <br>
         @foreach($rooms as $key => $room)
-        {{ Form::checkbox('room[]', $key) }}
-        {{$room}}
-        {{ Form::text($key.'date', null, ['class' => 'datepicker ' . $key]) }}<br>
-            @for ($i = 1; $i < 73; $i++)
-            {{ Form::checkbox($key.'time[]', $i) }}
-                {{$i}}
-            @endfor
-        <label>
-        </label><br>
-        @endforeach
+            <div id={{$key}}>
+            {{ Form::checkbox('room[]', $key) }}
+            {{$room}}
+            @foreach($dateTimeArray as $day => $hours)
+                @foreach ($hours as $hour)
+                    <?php $arr = array('experience_id' => $key, 'time' => $day.' '.$hour)?>
+                        @if(in_array($arr, $reservations))
+                            {{ Form::checkbox($key.'time[]', $day.' '.$hour, true, ['class' => 'hours']) }}
+                            {{ Form::label($day.' '.$hour, $hour)}}
+                        @else
+                        <span class="hidden">
+                            {{ Form::checkbox($key.'time[]', $day.' '.$hour, null, ['class' => 'hours']) }}
+                            {{ Form::label($day.' '.$hour, $hour)}}
+                        </span>
+                        @endif
+                    @endforeach
+                @endforeach
+                </div>
+            @endforeach
 
-    {{ Form::submit('Order') }}
+        {{ Form::submit('Order') }}
+    <script>
+        function showFirst() {
+            $(".hours").each(function () {
+                if ($(this).val().slice(0,-6) == $('#date').val()) {
+                    $(this).parent().removeClass('hidden');
+                }
+            });
+        }
+        showFirst();
+
+        $('#date').on('change', hideTimes);
+           function hideTimes() {
+               $(".hours").each(function () {
+                   if ($(this).val().slice(0,-6) == $('#date').val()) {
+                       $(this).parent().removeClass('hidden');
+                   } else if(!$(this).parent().hasClass('hidden')) {
+                       $(this).parent().addClass('hidden');
+                   } else {
+
+                   }
+               });
+           }
+    </script>

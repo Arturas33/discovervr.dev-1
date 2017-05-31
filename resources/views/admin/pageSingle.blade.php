@@ -9,18 +9,18 @@
             <th>Value</th>
         </tr>
         @foreach($item as $key => $value)
-
-            @if($key != 'translation' && $key != 'category' && $key != 'resource')
+            @if(!is_array($value))
             <tr>
                 <td>{{$key}}</td>
                 <td>
                     {{$value}}
                 <td>
             </tr>
+
             @elseif ($key == 'translation')
                 @foreach ($value as $key => $translation)
                     @foreach ($translation['pivot'] as $key => $lang)
-                        @if($key != 'page_id' && $key != 'language_code')
+                        @if(!in_array($key, $ignore))
                         <tr>
                         <td>
                             {{$key . ' ' . $translation['pivot']['language_code']}}

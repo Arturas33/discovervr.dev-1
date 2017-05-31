@@ -1,7 +1,7 @@
 @extends('base')
 
 @section('content')
-    {{--{{dd($menu)}}--}}
+
     {!! Form::open(['url' => $route])!!}
 
     <div>
@@ -13,10 +13,10 @@
 
                 @if(!in_array($key, $ignore))
 
-                    {{$key . ' ' . $value['pivot']['language_code']}}
+                {{$key . ' ' . $value['pivot']['language_code']}}
 
-                    {{ Form::label('', null, ['class' => 'control-label']) }}
-                        {{ Form::text($key . '_' . $value['pivot']['language_code'], $translation) }}
+                {{ Form::label('', null, ['class' => 'control-label']) }}
+                {{ Form::text($key . '_' . $value['pivot']['language_code'], $translation) }}
 
                 @endif
             @endforeach

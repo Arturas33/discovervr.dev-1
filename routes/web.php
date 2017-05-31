@@ -37,7 +37,7 @@ Route::get('/admin', function () {
 
 
 
-Route::group(['prefix' => 'admin'], function () {
+Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin-permissions']] , function () {
 
     Route::group(['prefix' => 'menu'], function () {
 
@@ -92,10 +92,20 @@ Route::group(['prefix' => 'admin'], function () {
             });
         });
 
-        Route::group(['prefix' => 'en'], function () {
-            Route::get('/{slug}', ['as' => 'app.pages.index', 'uses' => 'VrPagesController@indexFrontEndEn']);
+//        Route::group(['prefix' => 'en'], function () {
+//            Route::get('/{slug}', ['as' => 'app.pages.index', 'uses' => 'VrPagesController@indexFrontEndEn']);
+//        });
+
+    Route::group(['prefix' => 'users'], function () {
+        Route::get('/', ['as' => 'app.users.index', 'uses' => 'VrUsersController@index']);
+        Route::get('/create', ['as' => 'app.users.create', 'uses' => 'VrUsersController@create']);
+        Route::post('/create', ['uses' => 'VrUsersController@store']);
+        Route::group(['prefix' => '{id}'], function () {
+            Route::get('/', ['as' => 'app.users.show', 'uses' => 'VrUsersController@show']);
+            Route::get('/edit', ['as' => 'app.users.edit', 'uses' => 'VrUsersController@edit']);
+            Route::post('/edit', ['uses' => 'VrUsersController@update']);
+            Route::delete('/delete', ['as' => 'app.users.destroy', 'uses' => 'VrUsersController@destroy']);
         });
-
-
-
+    });
 });
+
