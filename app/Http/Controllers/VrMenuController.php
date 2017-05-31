@@ -11,6 +11,19 @@ use Session;
 class VrMenuController extends Controller
 {
 
+    public function frontendIndex ()
+    {
+        $dataFromModel = new VrMenu;
+        $config['tableName'] = $dataFromModel->getTableName();
+        $config['list'] = $dataFromModel->where('vr_parent_id', '=', null)-> get()->toArray();
+        $config['listDropDown'] = $dataFromModel->where('vr_parent_id', '!=', null)-> get()->toArray();
+
+        //dd($config);
+
+        return view('frontend', $config);
+    }
+
+
     /**
      * Display a listing of the resource.
      * GET /vrmenu
@@ -23,6 +36,13 @@ class VrMenuController extends Controller
         $config = $this->listBladeData();
         $config['tableName'] = $dataFromModel->getTableName();
         $config['list'] = VrMenu::orderBy('sequence', 'asc')->with(['translation'])->get()->toArray();
+        if($config['list'] == null )
+        {
+            return redirect()->route('app.menu.create', $config);
+        }
+
+        $config['ignore'] = ['id','menu_id'];
+
         return view('admin.listView', $config);
     }
 
@@ -36,7 +56,6 @@ class VrMenuController extends Controller
     {
         $config['menu'] = VrMenu::get()->toArray();
         $config['route'] = 'app.menu.create';
-
         $config['listParentIdNull'] = VrMenu::where('vr_parent_id', '=', null)->pluck('name','id')->toArray();
 
         return view('admin.menu.create', $config);

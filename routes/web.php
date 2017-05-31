@@ -17,13 +17,30 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
+Route::get('/', ['as' => 'app.menu.frontendIndex',  'uses' => 'VrMenuController@frontendIndex']);
+
 Route::get('/admin', function () {
     return view('base');
 });
+//
+//Route::get('/', function () {
+//
+//    return view('frontend');
+//});
+
+
+
+
+
+
+
+
+
 
 Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin-permissions']] , function () {
 
     Route::group(['prefix' => 'menu'], function () {
+
 
         Route::get('/', ['as' => 'app.menu.index', 'uses' => 'VrMenuController@index']);
         Route::get('/create', ['as' => 'app.menu.create', 'uses' => 'VrMenuController@create']);
