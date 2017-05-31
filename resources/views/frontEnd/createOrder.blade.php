@@ -1,27 +1,25 @@
 <html lang="en">
 <head>
+
     @include('style')
     {{--<meta charset="utf-8">--}}
     <script src="http://code.jquery.com/jquery-2.0.0.js"></script>
     {!! Form::open(['url' => route('app.orders.create')]) !!}
 
     {{ Form::select('date', $date, null, ['id' => 'date']) }} <br>
+
         @foreach($rooms as $key => $room)
-            <div id={{$key}}>
-            {{ Form::checkbox('room[]', $key) }}
-            {{$room}}
-            @foreach($dateTimeArray as $day => $hours)
-                @foreach ($hours as $hour)
-                    <?php $arr = array('experience_id' => $key, 'time' => $day.' '.$hour)?>
-                        @if(in_array($arr, $reservations))
-                            {{ Form::checkbox($key.'time[]', $day.' '.$hour, true, ['class' => 'hours']) }}
-                            {{ Form::label($day.' '.$hour, $hour)}}
-                        @else
+
+        <div id={{$key}}>
+                {{ Form::checkbox('room[]', $key) }}
+                {{$room}}
+                @foreach($dateTimeArray as $day => $hours)
+                    @foreach ($hours as $hour)
                         <span class="hidden">
                             {{ Form::checkbox($key.'time[]', $day.' '.$hour, null, ['class' => 'hours']) }}
                             {{ Form::label($day.' '.$hour, $hour)}}
                         </span>
-                        @endif
+
                     @endforeach
                 @endforeach
                 </div>
