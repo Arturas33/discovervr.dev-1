@@ -1,16 +1,19 @@
 @extends('base')
 @section('content')
+    {{--{{dd($list)}}--}}
     <div class="container">
+        <h2>{{ucfirst($tableName)}} table</h2>
+        @if(isset($create))
+            <a href="{{ route($create) }}">Create new {{$tableName}}</a>
+        @endif
 
-
-        <h2>{{ucfirst($tableName)}}s table</h2>
-        <a href="{{ route($create) }}">Create new {{$tableName}}</a>
         <table class="table table-bordered">
             <thead>
             <tr>
                 @foreach($list[0] as $key => $value)
                     <th>{{$key}}</th>
                 @endforeach
+
                 <th>edit</th>
                 <th>show</th>
                 <th>delete</th>
@@ -36,9 +39,25 @@
 
                                     @endif
                                 @endforeach
+                            @elseif($key == 'experiences');
+                                @foreach($value as $key => $experiences)
+                                    @foreach($experiences['pivot'] as $key => $time)
+                                        @if(!in_array($key, $ignore) )
+                                        <li>{{$time}}</li>
+                                        @endif
+                                    @endforeach
+                                @endforeach
                             @endif
+
                         </td>
                     @endforeach
+
+                    @if(isset($orders))
+                        <td><a href="{{ route($orders,$record['id']) }}">
+                                <button type="button" class="btn btn-primary">Orders</button>
+                            </a>
+                        </td>
+                    @endif
 
                     <td><a href="{{ route($edit,$record['id']) }}">
                             <button type="button" class="btn btn-primary">Edit</button>

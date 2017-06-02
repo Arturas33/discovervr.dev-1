@@ -9,17 +9,16 @@
 
                 </ul>
                 @foreach($listDropDown as $key => $dropDown  )
-                        <ul>
-                            @if($dropDown['vr_parent_id'] == $record['id'])
-                                <ul>
-                                    <li><a href=" {{ $dropDown['url'] }}"> {{$dropDown['name']}} </a></li>
-                                </ul>
-                            @endif
-                        </ul>
+                    <ul>
+                        @if($dropDown['vr_parent_id'] == $record['id'])
+                            <ul>
+                                <li><a href=" {{ $dropDown['url'] }}"> {{$dropDown['name']}} </a></li>
+                            </ul>
+                        @endif
+                    </ul>
                 @endforeach
             </div>
         @endforeach
-
 
 
     </div>

@@ -59,10 +59,10 @@
             @endif
 
         @endforeach
-        {{Form::submit('Submit')}}
 
-        {!! Form::close() !!}
     </table>
-    {{Form::submit('Edit')}}
+    {{Form::submit('Submit')}}
+    {!! Form::close() !!}
+
 </div>
     @endsection

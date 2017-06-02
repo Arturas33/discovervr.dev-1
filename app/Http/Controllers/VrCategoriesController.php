@@ -39,7 +39,7 @@ class VrCategoriesController extends Controller {
 	 */
 	public function create()
 	{
-		return view ('admin.createCategory');
+		return view ('admin.categories.createCategory');
 	}
 
 	/**
@@ -73,7 +73,7 @@ class VrCategoriesController extends Controller {
         $config = [];
         $config['item'] = VrCategories::with(['translation'])->find($id)->toArray();
 
-        return view('admin.categoriesSingle', $config);
+        return view('admin.categories.categoriesSingle', $config);
 	}
 
 	/**
@@ -89,7 +89,7 @@ class VrCategoriesController extends Controller {
         $config['route'] = 'app.categories.edit';
         $config['id'] = $id;
         $config['item'] = VrCategories::with(['translation'])->find($id)->toArray();
-        return view('admin.categoriesEdit', $config);
+        return view('admin.categories.categoriesEdit', $config);
 	}
 
 	/**

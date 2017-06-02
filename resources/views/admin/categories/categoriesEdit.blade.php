@@ -1,14 +1,14 @@
-
-
 @extends('base')
+
 @section('content')
+
+    {{dd($item)}}
 
 <div class="container">
     <div class="row">
         <div class="col-md-12">
             {!! Form::open(['url' => route($route, $id)]) !!}
             <table class="table table-bordered">
-
                 @foreach($item['translation'] as $value)
                     @foreach($value['pivot'] as $key => $translation)
                         <tr>

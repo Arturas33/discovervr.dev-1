@@ -1,5 +1,6 @@
 <?php namespace App\Http\Controllers;
 
+use App\Models\VrOrder;
 use App\Models\VrUsers;
 use Illuminate\Routing\Controller;
 use Ramsey\Uuid\Uuid;
@@ -17,12 +18,18 @@ class VrUsersController extends Controller
     {
         $dataFromModel = new VrUsers();
         $config = $this->listBladeData();
+        $config['orders'] = 'app.users.orders';
         $config['tableName'] = $dataFromModel->getTableName();
         $config['list'] = VrUsers::with(['orders'])->get()->toArray();
-//        if($config['list'] == null)
-//        {
-//            return redirect()->route('app.users.', $config);
-//        }
+
+        return view('admin.listView', $config);
+    }
+
+    public function orderIndex (string $id)
+    {
+        $config['list'] = VrOrder::where('user_id', $id)->get()->toArray();
+        $config['tableName'] = (new VrOrder())->getTableName();
+        dd($config);
         return view('admin.listView', $config);
     }
 
@@ -36,7 +43,7 @@ class VrUsersController extends Controller
     {
         $config['users'] = VrUsers::get()->toArray();
         $config['route'] = 'app.users.create';
-        return view('admin.userEdit', $config);
+        return view('admin.users.userEdit', $config);
     }
 
     /**
@@ -48,15 +55,15 @@ class VrUsersController extends Controller
     public function store()
     {
         $data = request()->all();
-        VrUsers::create([
+
+        $record = VrUsers::create([
             'id' => Uuid::uuid4(),
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => $data['password'],
             'phone' => $data['phone'],
         ]);
-
-        return view('admin.userEdit');
+        return redirect()->route('app.users.index', $record);
     }
 
     /**
@@ -68,7 +75,9 @@ class VrUsersController extends Controller
      */
     public function show($id)
     {
-        //
+        $config = [];
+        $config['item'] = VrUsers::with(['orders'])->find($id)->toArray();
+        return view('admin.orderList');
     }
 
     /**
@@ -83,8 +92,8 @@ class VrUsersController extends Controller
         $config = [];
         $config['route'] = 'app.users.edit';
         $config['id'] = $id;
-
-
+        $config['item'] = VrUsers::with(['orders'])->find($id)->toArray();
+        return view('admin.userEdit', $config);
     }
 
     /**
@@ -96,7 +105,15 @@ class VrUsersController extends Controller
      */
     public function update($id)
     {
-        //
+        $data = request()->all();
+
+        VrUsers::where('id', '=', $id)->update([
+            'name' => $data['name'],
+            'email' => $data['email'],
+            'phone' => $data['phone'],
+        ]);
+        //dd($record);
+        return redirect()->route('app.users.index');
     }
 
     /**
@@ -110,6 +127,7 @@ class VrUsersController extends Controller
     {
         //
     }
+
     private function listBladeData()
     {
         $config = [];

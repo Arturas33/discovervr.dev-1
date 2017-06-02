@@ -18,26 +18,14 @@ class VrOrderController extends Controller {
 	 */
 	public function index()
 	{
-
-
-
-//        $dataFromModel = new VrOrder;
-//        $config = $this->listBladeData();
-//        $config['tableName'] = $dataFromModel->getTableName();
-//        $config['list'] = $dataFromModel->with(['experiences'])->get()->toArray();
-//
-//		return view('admin.listView', $config);
-
-        $carbonForm = Carbon::createFromDate(2000, 04, 11, 'Europe/Vilnius');
-        echo $carbonForm;
-
-        $dates = [];
-
-        for($date = Carbon::now('Europe/Vilnius')->addHours(2)->minute(10)->second(0); $date->lte(Carbon::createFromTime(22, 00, 00, 'Europe/Vilnius')); $date->addMinutes(10)) {
-            $dates[] = $date->format('Y/m/d H:i:s');
-        }
-
-        dd($dates);
+        $dataFromModel = new VrOrder();
+        $config = $this->listBladeData();
+        $config['tableName'] = $dataFromModel->getTableName();
+        $config['list'] = $dataFromModel->with(['experiences'])->get()->toArray();
+        $config['ignore'] = ['experience_id', 'order_id'];
+        return view('admin.listView', $config);
+	    //return VrOrder::with(['user', 'experiences'])->get()->toArray();
+        dd($config);
 	}
 
 
@@ -81,13 +69,28 @@ class VrOrderController extends Controller {
         $config['time'] = $time;
 		$config['rooms'] = VrPages::with(['translation'])->where('category_id', '=', 'virtual-rooms')->pluck('id', 'id');
 		$reservations = VrReservations::select('experience_id', 'time')->get()->toArray();
-//		foreach ($reservations as $reservation) {
-//            foreach ($reservation as $key => $item) {
-//                unset($item[$key]);
-//                $reservation[] = $item;
-//            }
-//        }
-//        dd($reservations);
+
+		$newArr = [];
+        foreach ($reservations as $key => $reservation) {
+            if(!in_array($reservation['experience_id'], $newArr)) {
+                array_push($newArr, $reservation['experience_id']);
+                }
+            }
+        $newArrKeys = array_flip($newArr);
+
+        foreach ($newArrKeys as $key1 => $item) {
+            $item = [];
+            foreach ($reservations as $key2 => $reservation) {
+                if($key1 == $reservation['experience_id']) {
+                    array_push($item, $reservation['time']);
+                }
+            }
+            $newArrKeys[$key1] = $item;
+        }
+
+        $config['checkRoomTimes'] = $newArrKeys;
+
+
 		return view ('frontEnd.createOrder', $config);
 
 	}
@@ -130,7 +133,12 @@ class VrOrderController extends Controller {
 	 */
 	public function show($id)
 	{
-		//
+        $dataFromModel = new VrOrder();
+        $config = $this->listBladeData();
+        $config['tableName'] = $dataFromModel->getTableName();
+        $config['list'] = $dataFromModel->with(['experiences'])->find($id)->toArray();
+        $config['ignore'] = ['experience_id', 'order_id'];
+        return view('admin.orders.ordersSingle', $config);
 	}
 
 	/**

@@ -2,17 +2,18 @@
 
 @section('content')
 
-    {!! Form::open(['url' => route($route)]) !!}
+    {!! Form::open(['url' => route($route, $id)]) !!}
+
 
 {{Form::label('name','User name ')}}
-{{ Form::text('name')}}<br>
+{{ Form::text('name', $item['name'])}}<br>
 
 {{Form::label('email','User email ')}}
-{{Form::text('email')}}<br>
+{{Form::text('email', $item['email'])}}<br>
 
 
 {{Form::label('phone','User phone ')}}
-{{ Form::text('phone')}} <br>
+{{ Form::text('phone', $item['phone'])}} <br>
 
 
 
