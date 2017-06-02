@@ -1,6 +1,7 @@
 @extends('styleFrontEnd')
 
 
+
 @foreach($list as $key => $record  )
 
     <div class="col-md-2 dropdown">
