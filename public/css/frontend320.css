@@ -1,0 +1,28 @@
+@media screen and (max-width: 320px) {
+    body {
+        background-color: red;
+    }
+
+    /* collapse button */
+    .navbar-default .navbar-toggle:focus, .navbar-default .navbar-toggle:hover {
+        background-color: black;
+        border-color: darkorange;
+    }
+
+    .navbar-default .navbar-toggle .icon-bar {
+        background-color: white;
+    }
+
+    .navbar-default .navbar-toggle:hover, .navbar-default .navbar-toggle .icon-bar {
+        background-color: darkorange;
+        color: darkorange;
+    }
+
+    .navbar-default .navbar-nav .open .dropdown-menu>li>a {
+        color: white;
+    }
+
+    .navbar-default .navbar-nav .open .dropdown-menu>li>a:hover, .navbar-default .navbar-nav .open .dropdown-menu>li>a:focus {
+        color: darkorange;
+    }
+}

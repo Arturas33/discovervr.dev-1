@@ -1,0 +1,114 @@
+body {
+    background-color: yellow;
+}
+
+.black {
+    background-color: black;
+}
+
+.navbar-default {
+    background-color: black;
+    display: -webkit-flex;
+    -webkit-justify-content: space-around;
+    justify-content: space-around;
+    border: none;
+    border-radius: 0;
+    margin-bottom: 0;
+    position: fixed;
+    z-index: 1;
+    width: 100%
+}
+
+.navbar-default .navbar-nav>.active>a, .navbar-default .navbar-nav>.active>a:focus, .navbar-default .navbar-nav>.active>a:hover {
+    color: white;
+    background-color: black;
+}
+
+.navbar-default .navbar-nav>.active>a:focus, .navbar-default .navbar-nav>.active>a:hover {
+    color: darkorange;
+    background-color: black;
+}
+
+
+a, a:hover, a:active, a:visited, a:focus {
+    text-decoration:none;
+    color: white;
+}
+
+a:hover, a:focus {
+    color: darkorange;
+}
+
+ul> li > a {
+    background-color: black;
+}
+ul> li > a, a:hover, a:focus {
+    background-color: black;
+}
+
+li  {
+    list-style:none;
+}
+
+ul.dropdown-menu {
+    background-color: black;
+    border-radius: 0px;
+    margin: 0px;
+}
+
+.dropdown-menu>li>a:focus, .dropdown-menu>li>a:hover {
+    text-decoration: none;
+    color: darkorange;
+    background-color: black;
+}
+
+.nav>li>a:focus, .nav>li>a:hover {
+    text-decoration: none;
+    background-color: black;
+}
+
+.nav .open>a, .nav .open>a:focus, .nav .open>a:hover {
+    background-color: black;
+    border-color: #3097D1;
+}
+
+.dropdown-menu > li > a {
+    color: white;
+}
+
+#home {
+    background: url("../images/titlecover.jpg") no-repeat center center;
+    height: 1225px;
+    width: 100%;
+    background-size: cover;
+    -webkit-clip-path: polygon(0 0, 100% 0, 100% 92%, 0 100%);
+    clip-path: polygon(0 0, 100% 0, 100% 92%, 0 100%);
+    -webkit-transition: height 0.5s;
+}
+
+#red-flag {
+    background: url("../images/electromart-red-flag.png") no-repeat center center;
+    height: 340px;
+    width: 326px;
+    margin: 0 auto;
+    background-position-y: -100px;
+}
+
+#elektro-logo {
+    background: url("../images/elektromartlogo.png") no-repeat center center;
+    height: 250px;
+    width: 210px;
+    padding-top: 200px;
+    margin: 0 auto;
+    background-size: contain;
+    text-align: center;
+    position: relative;
+}
+
+#elektro-logo p {
+    position: absolute;
+    margin-top: -15px;
+    margin-left: 20px;
+    text-align: center;
+    color: white;
+}

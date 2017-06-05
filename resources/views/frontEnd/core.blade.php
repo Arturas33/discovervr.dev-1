@@ -6,6 +6,7 @@
 </head>
 <body>
     @include('frontEnd.menu')
+    @yield('content')
 </body>
     @include('frontEnd.js')
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
