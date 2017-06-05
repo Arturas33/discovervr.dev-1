@@ -16,8 +16,6 @@ class VrMenuController extends Controller
         $dataFromModel = new VrMenu;
         $config['tableName'] = $dataFromModel->getTableName();
         $config['list'] = $dataFromModel->where('vr_parent_id', '=', null)->get()->toArray();
-        $config['listDropDown'] = $dataFromModel->where('vr_parent_id', '!=', null)->get()->toArray();
-
 
         return view('frontEnd.frontend', $config);
     }

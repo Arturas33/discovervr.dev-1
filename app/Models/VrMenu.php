@@ -20,7 +20,7 @@ class VrMenu extends CoreModel
 
 
 
-    public function  subCategory()
+    public function subCategory()
     {
         return $this->hasMany(VrMenu::class, 'vr_parent_id');
     }

@@ -16,7 +16,7 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::get('/', ['as' => 'app.menu.frontendIndex', 'uses' => 'VrMenuController@frontendIndex']);
+Route::get('/frontendtest', ['as' => 'app.frontEnd.index', 'uses' => 'FrontEndController@index']);
 
 
 Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin-permissions']], function () {
