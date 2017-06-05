@@ -60,4 +60,13 @@
         -webkit-clip-path: polygon(0 0, 100% 0, 100% 95%, 0 100%);
         clip-path: polygon(0 0, 100% 0, 100% 95%, 0 100%);
     }
+    #info {
+
+        font-size: 10px;
+        padding: 7px 35px;
+        width: 230px;
+        margin-top: 35%;
+    }
+
+
 }

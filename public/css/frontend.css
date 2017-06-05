@@ -88,7 +88,7 @@ ul.dropdown-menu {
 
 #red-flag {
     background: url("../images/electromart-red-flag.png") no-repeat center center;
-    height: 340px;
+    height: 240px;
     width: 326px;
     margin: 0 auto;
     background-position-y: -100px;
@@ -107,8 +107,30 @@ ul.dropdown-menu {
 
 #elektro-logo p {
     position: absolute;
-    margin-top: -15px;
-    margin-left: 20px;
+    margin-top: -120px;
+    margin-left: 45px;
+    text-align: center;
+    color: #FF958B;
+    font-size: 18px;
+}
+#title {
+    font-family: 'Nunito Sans', sans-serif;
+    font-family: 'Nunito Sans', sans-serif;
+    font-size: 15vw;
+    color: #f2f2f2;
+    text-align: center;
+    text-shadow: 0px 0px 20px rgba(0,0,0,0.5);
+    text-transform: uppercase;
+    transform: scale(0.9,1.2);
+
+}
+#info {
+    margin: 0 auto;
     text-align: center;
     color: white;
+    width: 360px;
+    padding: 10px 50px;
+    background-color: #Fd7B56;
+    font-size: 16px;
+
 }

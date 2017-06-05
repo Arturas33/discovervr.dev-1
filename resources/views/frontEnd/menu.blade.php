@@ -29,6 +29,12 @@
                         @endif
                     </li>
                 @endforeach
+                    <li class="active">
+                        <a id="dropdownMenu1" data-toggle="dropdown"
+                           aria-haspopup="true" aria-expanded="true" href="{{$record['url'] }}"> {{$record['name']}} <i class="fa fa-caret-down" aria-hidden="true"></i> </a>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenu1"></ul>
+                    </li>
+
             </ul>
         </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->
