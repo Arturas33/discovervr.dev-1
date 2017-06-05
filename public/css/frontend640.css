@@ -1,0 +1,63 @@
+/*********************************************************************************
+************************************ TEST ****************************************
+*********************************************************************************/
+
+@media screen and (max-width: 767px) {
+    body {
+        background-color: orange;
+    }
+
+    /* collapse button */
+    .navbar-default .navbar-toggle:focus, .navbar-default .navbar-toggle:hover {
+        background-color: black;
+        color: darkorange;
+        border-color: darkorange;
+    }
+
+    .navbar-default .navbar-toggle .icon-bar {
+        background-color: white;
+    }
+
+    .navbar-toggle:hover .icon-bar {
+        background-color: darkorange;
+    }
+
+    .navbar-default .navbar-nav .open .dropdown-menu>li>a:hover, .navbar-default .navbar-nav .open .dropdown-menu>li>a:focus {
+        color: darkorange;
+    }
+}
+
+@media screen and (max-width: 640px) {
+    body {
+        background-color: orange;
+    }
+
+    /* collapse button */
+    .navbar-default .navbar-toggle:focus, .navbar-default .navbar-toggle:hover {
+        background-color: black;
+        color: darkorange;
+        border-color: darkorange;
+    }
+
+    .navbar-default .navbar-toggle .icon-bar {
+        background-color: white;
+    }
+
+    .navbar-default .navbar-nav .open .dropdown-menu>li>a {
+        color: white;
+    }
+
+    .navbar-toggle:hover .icon-bar {
+        background-color: darkorange;
+    }
+
+    .navbar-default .navbar-nav .open .dropdown-menu>li>a:hover, .navbar-default .navbar-nav .open .dropdown-menu>li>a:focus {
+        color: darkorange;
+    }
+
+    #home {
+        height: 800px;
+        -webkit-clip-path: polygon(0 0, 100% 0, 100% 95%, 0 100%);
+        clip-path: polygon(0 0, 100% 0, 100% 95%, 0 100%);
+    }
+}

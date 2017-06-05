@@ -41,8 +41,7 @@
             });
         }
         showFirst();
-
-                           $('#date').on('change', hideTimes);
+                   $('#date').on('change', hideTimes);
                        function hideTimes() {
                            $(".hours").each(function () {
                                if ($(this).val().slice(0,-6) == $('#date').val()) {
@@ -50,7 +49,6 @@
                                } else if(!$(this).parent().hasClass('hidden')) {
                                    $(this).parent().addClass('hidden');
                                } else {
-
                    }
                });
            }
